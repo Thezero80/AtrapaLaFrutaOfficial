@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atrapa la Fruta</title>
+  <title>Atrapa la Fruta | FabianSM 2025</title>
+  <link rel="icon" type="image/png" href="https://github.com/Thezero80/AtrapaLaFrutaOfficial/blob/main/assets/icono.png?raw=true">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
   <div class="container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100 position-relative">
@@ -21,11 +23,57 @@
       <p class="text-neon">Puntaje Final: <span id="finalScore">0</span></p>
       <button id="restartBtn" class="btn btn-neon mt-3 animate-pulse">Jugar de Nuevo</button>
     </div>
-    <h3 class="text-center mb-4 animate-subtitle">¡Si llegas A 5K Mandas captura!</h3>
+    <h3 class="text-center mb-4 animate-subtitle">¡Si llegas A 4K Mandas captura!</h3>
     <h3 class="text-center mb-4 animate-pulse">¡Tu Record Tiene Premios!</h3>
     <h4 class="text-center mb-4 animate-text">FabianSM</h4>
   </div>
+
+  <!-- Modal de Instrucciones -->
+  <div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-neon border-neon animate__animated animate__fadeInDown">
+        <div class="modal-header border-0">
+          <h2 class="modal-title w-100 text-center animate-title" id="instructionsModalLabel">¿Cómo Jugar?</h2>
+        </div>
+        <div class="modal-body text-center animate-subtitle">
+          <ul class="list-unstyled fs-5 mb-3">
+            <li>Atrapa las frutas moviendo la canasta con el mouse o el dedo.</li><hr>
+            <li>🍏 <b>Manzana</b>: 10 puntos</li><hr>
+            <li>🍌 <b>Banana</b>: 20 puntos</li><hr>
+            <li>🍊 <b>Naranja</b>: 30 puntos</li><hr>
+            <li><b>❌ Si dejas caer una fruta, el juego termina.</b></li>
+            <li>¡Llega a 4000 puntos y manda tu captura!</li>
+          </ul>
+          <span class="fw-bold animate-pulse">¡Buena suerte!</span>
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn btn-neon animate-pulse" data-bs-dismiss="modal">¡Jugar!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/game.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var instructionsModal = new bootstrap.Modal(document.getElementById('instructionsModal'));
+      instructionsModal.show();
+
+      // Espera a que el modal se cierre para iniciar el juego
+      document.getElementById('instructionsModal').addEventListener('hidden.bs.modal', function () {
+        // Inicia el juego solo después de cerrar el modal
+        if (typeof basketImg !== 'undefined' && basketImg.complete) {
+          spawnFruit();
+          gameLoop();
+        } else {
+          basketImg.onload = () => {
+            spawnFruit();
+            gameLoop();
+          };
+        }
+      });
+    });
+  </script>
 </body>
 </html>

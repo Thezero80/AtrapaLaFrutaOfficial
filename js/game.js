@@ -33,10 +33,19 @@ const fruitImages = [
 // Cargar imágenes
 const basketImg = new Image();
 basketImg.src = 'https://github.com/Thezero80/AtrapaLaFrutaOfficial/blob/main/assets/basket.png?raw=true';
-const loadedFruitImages = fruitImages.map(src => {
+
+// Asocia cada imagen con su puntaje
+const fruitData = [
+  { src: 'https://github.com/Thezero80/AtrapaLaFrutaOfficial/blob/main/assets/apple.png?raw=true', points: 10 },
+  { src: 'https://github.com/Thezero80/AtrapaLaFrutaOfficial/blob/main/assets/banana.png?raw=true', points: 20 },
+  { src: 'https://github.com/Thezero80/AtrapaLaFrutaOfficial/blob/main/assets/orange.png?raw=true', points: 30 }
+];
+
+// Cargar imágenes y asociar puntaje
+const loadedFruitImages = fruitData.map(data => {
   const img = new Image();
-  img.src = src;
-  return img;
+  img.src = data.src;
+  return { img, points: data.points };
 });
 
 // Clase Fruta
@@ -47,7 +56,10 @@ class Fruit {
     this.x = Math.random() * (canvas.width - this.width);
     this.y = 0;
     this.speed = 2 + Math.random() * 2;
-    this.image = loadedFruitImages[Math.floor(Math.random() * loadedFruitImages.length)];
+    // Selecciona aleatoriamente una fruta y su puntaje
+    const fruit = loadedFruitImages[Math.floor(Math.random() * loadedFruitImages.length)];
+    this.image = fruit.img;
+    this.points = fruit.points;
   }
 
   draw() {
@@ -91,7 +103,7 @@ function checkCollisions() {
       fruit.y < basket.y + basket.height &&
       fruit.y + fruit.height > basket.y
     ) {
-      score += 10;
+      score += fruit.points; // Usa el puntaje de la fruta atrapada
       scoreElement.textContent = score;
       fruits.splice(index, 1);
     } else if (fruit.y > canvas.height) {
@@ -145,7 +157,7 @@ function gameLoop() {
 }
 
 // Iniciar el juego cuando la imagen de la canasta se cargue
-basketImg.onload = () => {
+/* basketImg.onload = () => {
   spawnFruit();
   gameLoop();
-};
+}; */
