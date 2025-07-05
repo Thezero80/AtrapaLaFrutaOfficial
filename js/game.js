@@ -103,8 +103,10 @@ function checkCollisions() {
       fruit.y < basket.y + basket.height &&
       fruit.y + fruit.height > basket.y
     ) {
-      score += fruit.points; // Usa el puntaje de la fruta atrapada
+      score += fruit.points;
       scoreElement.textContent = score;
+      soundCatch.currentTime = 0; // Reinicia el sonido si se reproduce rápido
+      soundCatch.play();
       fruits.splice(index, 1);
     } else if (fruit.y > canvas.height) {
       gameOver();
@@ -118,6 +120,8 @@ function gameOver() {
   gameIsOver = true;
   gameOverElement.classList.remove('d-none');
   finalScoreElement.textContent = score;
+  soundGameOver.currentTime = 0;
+  soundGameOver.play();
 }
 
 // Reiniciar juego
@@ -133,8 +137,17 @@ function restart() {
 
 // Listener para reiniciar
 document.addEventListener('DOMContentLoaded', () => {
-  restartBtn.addEventListener('click', restart);
+  restartBtn.addEventListener('click', function() {
+    soundClick.currentTime = 0;
+    soundClick.play();
+    restart();
+  });
 });
+
+// Sonidos
+const soundCatch = new Audio('assets/sounds/catch.wav');
+const soundGameOver = new Audio('assets/sounds/gameover.wav');
+const soundClick = new Audio('assets/sounds/click.wav');
 
 // Bucle del juego
 function gameLoop() {

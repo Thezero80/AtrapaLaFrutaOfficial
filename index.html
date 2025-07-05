@@ -60,6 +60,14 @@
       var instructionsModal = new bootstrap.Modal(document.getElementById('instructionsModal'));
       instructionsModal.show();
 
+      // Sonido al hacer clic en el botón "¡Jugar!" del modal
+      document.querySelector('#instructionsModal .btn[data-bs-dismiss="modal"]').addEventListener('click', function () {
+        if (typeof soundClick !== 'undefined') {
+          soundClick.currentTime = 0;
+          soundClick.play();
+        }
+      });
+
       // Espera a que el modal se cierre para iniciar el juego
       document.getElementById('instructionsModal').addEventListener('hidden.bs.modal', function () {
         // Inicia el juego solo después de cerrar el modal
