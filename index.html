@@ -66,6 +66,10 @@
           soundClick.currentTime = 0;
           soundClick.play();
         }
+        if (typeof bgMusic !== 'undefined' && bgMusic.paused) {
+          bgMusic.currentTime = 0;
+          bgMusic.play();
+        }
       });
 
       // Espera a que el modal se cierre para iniciar el juego

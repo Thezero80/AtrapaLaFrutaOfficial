@@ -140,6 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
   restartBtn.addEventListener('click', function() {
     soundClick.currentTime = 0;
     soundClick.play();
+    if (bgMusic.paused) {
+      bgMusic.currentTime = 0;
+      bgMusic.play();
+    }
     restart();
   });
 });
@@ -148,6 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
 const soundCatch = new Audio('assets/sounds/catch.wav');
 const soundGameOver = new Audio('assets/sounds/gameover.wav');
 const soundClick = new Audio('assets/sounds/click.wav');
+
+// Música de fondo
+const bgMusic = new Audio('assets/sounds/bgmusic.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.5; // Puedes ajustar el volumen (0.0 a 1.0)
 
 // Bucle del juego
 function gameLoop() {
@@ -173,4 +182,5 @@ function gameLoop() {
 /* basketImg.onload = () => {
   spawnFruit();
   gameLoop();
+
 }; */
