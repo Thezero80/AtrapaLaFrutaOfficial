@@ -113,7 +113,7 @@ function checkCollisions() {
       fruits.splice(index, 1);
     }
   });
-};
+}
 
 // Fin del juego
 function gameOver() {
@@ -135,9 +135,40 @@ function restart() {
   spawnFruit();
 }
 
-// Listener para reiniciar
+// Función para iniciar el juego
+function startGame() {
+  soundClick.currentTime = 0;
+  soundClick.play();
+  if (bgMusic.paused) {
+    bgMusic.currentTime = 0;
+    bgMusic.play();
+  }
+  restart();
+}
+function tap() {
+  soundClick.currentTime = 0;
+  soundClick.play();
+}
+
+// Listener para reiniciar y mostrar modales
 document.addEventListener('DOMContentLoaded', () => {
-  restartBtn.addEventListener('click', function() {
+  // Show contest modal on page load
+  const contestModal = new bootstrap.Modal(document.getElementById('contestModal'), {
+    backdrop: 'static',
+    keyboard: false
+  });
+  contestModal.show();
+
+  // Show instructions modal when contest modal is closed
+  document.getElementById('contestModal').addEventListener('hidden.bs.modal', () => {
+    const howToPlayModal = new bootstrap.Modal(document.getElementById('howToPlayModal'), {
+      backdrop: 'static',
+      keyboard: false
+    });
+    howToPlayModal.show();
+  });
+
+  restartBtn.addEventListener('click', function () {
     soundClick.currentTime = 0;
     soundClick.play();
     if (bgMusic.paused) {
@@ -156,7 +187,56 @@ const soundClick = new Audio('assets/sounds/click.wav');
 // Música de fondo
 const bgMusic = new Audio('assets/sounds/bgmusic.mp3');
 bgMusic.loop = true;
-bgMusic.volume = 0.5; // Puedes ajustar el volumen (0.0 a 1.0)
+bgMusic.volume = 0.5;
+
+/* // Deshabilitar herramientas de inspección
+document.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  alert('¡No intentes hacer trampa! Juega limpio para ganar el concurso. 😊');
+});
+
+document.addEventListener('keydown', (e) => {
+  if (
+    e.ctrlKey && (e.key === 'i' || e.key === 'I' || e.key === 'c' || e.key === 'C' || e.key === 'j' || e.key === 'J' || e.key === 'u' || e.key === 'U') ||
+    e.key === 'F12'
+  ) {
+    e.preventDefault();
+    alert('¡Acceso a herramientas de desarrollo desactivado! Juega limpio para ganar el concurso. 😊');
+  }
+}); */
+
+// DESACTIVAR DESARROLLADOR
+// Deshabilitar herramientas de inspección y ver código fuente
+
+// 1. Deshabilitar el menú contextual (clic derecho)
+document.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  console.warn('¡No intentes hacer trampa! Juega limpio para ganar el concurso. 😊');
+});
+
+// 2. Deshabilitar atajos de teclado comunes para herramientas de desarrollo
+document.addEventListener('keydown', (e) => {
+  // Tecla F12
+  if (e.key === 'F12') {
+    e.preventDefault();
+    console.warn('¡Acceso a herramientas de desarrollo desactivado! Juega limpio para ganar el concurso. 😊');
+  }
+
+  // Combinaciones de Ctrl/Cmd + Shift + I, J, C (Inspector, Consola, Estilos)
+  // Ctrl/Cmd + U (Ver código fuente)
+  // Ctrl/Cmd + S (Guardar página)
+  if (
+    (e.ctrlKey || e.metaKey) && // Ctrl para Windows/Linux, Cmd para Mac
+    (
+      (e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || // Ctrl/Cmd+Shift+I/J/C
+      e.key === 'U' || // Ctrl/Cmd+U
+      e.key === 'S'    // Ctrl/Cmd+S
+    )
+  ) {
+    e.preventDefault();
+    console.warn('¡Acceso a herramientas de desarrollo desactivado! Juega limpio para ganar el concurso. 😊');
+  }
+});
 
 // Bucle del juego
 function gameLoop() {
@@ -179,8 +259,6 @@ function gameLoop() {
 }
 
 // Iniciar el juego cuando la imagen de la canasta se cargue
-/* basketImg.onload = () => {
-  spawnFruit();
+basketImg.onload = () => {
   gameLoop();
-
-}; */
+};
