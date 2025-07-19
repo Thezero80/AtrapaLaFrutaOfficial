@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="https://github.com/Thezero80/AtrapaLaFrutaOfficial/blob/main/assets/icono.png?raw=true">
+  <link rel="icon" type="image/png"
+    href="https://github.com/Thezero80/AtrapaLaFrutaOfficial/blob/main/assets/icono.png?raw=true">
   <title>𝐀𝐭𝐫𝐚𝐩𝐚 𝐥𝐚 𝐅𝐫𝐮𝐭𝐚 | 𝔽𝕒𝕓𝕚𝕒𝕟𝕊𝕄 𝟚𝟘𝟚𝟝</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
@@ -24,42 +25,29 @@
       <p class="text-neon">Puntaje Final: <span id="finalScore">0</span></p>
       <button id="restartBtn" class="btn btn-neon animate-pulse">Jugar de Nuevo</button>
     </div>
-    <p class="mt-3" style="color:#0ff; font-size:1.2rem; text-shadow:0 0 8px #0ff;">¡Si llegas A 10K Mandas captura!</p>
-    <p class="fw-bold animate-pulse" style="color:#f0f; text-shadow:0 0 10px #f0f;">¡Tu Record Tiene Premios!</p>
+    <p class="mt-3">¡Si llegas A 10K Mandas captura!</p>
+    <p>¡Tu Record Tiene Premios!</p>
     <p>FabianSM</p>
   </div>
 
-  <!-- Contest Modal -->
-  <div class="modal fade" id="contestModal" tabindex="-1" aria-labelledby="contestModalLabel" aria-hidden="true">
+  <!-- Modal de Podio (Reemplazo del concurso) -->
+  <div class="modal fade" id="podiumModal" tabindex="-1" aria-labelledby="podiumModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content"
-        style="background: rgba(0, 0, 0, 0.9); border: 2px solid #0ff; box-shadow: 0 0 20px #0ff;">
+        style="background: rgba(0, 0, 0, 0.9); border: 2px solid #0ff; box-shadow: 0 0 20px #0ff; border-radius: 10px;">
         <div class="modal-header justify-content-center">
-          <h5 class="modal-title text-neon" id="contestModalLabel"><strong>¡𝐂𝐎𝐍𝐂𝐔𝐑𝐒𝐎 𝐅𝐈𝐍𝐀𝐋𝐈𝐙𝐀𝐃𝐎!</strong></h5>
+          <h5 class="modal-title text-neon" id="podiumModalLabel">𝗟𝗜𝗦𝗧𝗔 𝗗𝗘 𝗚𝗔𝗡𝗔𝗗𝗢𝗥𝗘𝗦</h5>
         </div>
-        <div class="modal-body text-center" style="font-family: 'Orbitron', sans-serif;">
-          <div class="mb-3">
-            <span style="font-size:2.3rem; color:#0ff; text-shadow:0 0 10px #0ff, 0 0 20px #00f;">
-              ¡Concurso exitoso!
-            </span>
-          </div>
-          <p class="fw-bold" style="color:#ff0; text-shadow:0 0 8px #ff0;">
-            ¡Fue una batalla épica de reflejos y habilidad!
-          </p>
-          <p style="color:#fff; text-shadow:0 0 6px #0ff;">
-            Gracias a todos los gamers por su energía y pasión.
-          </p>
-          <div class="my-3">
-            <span style="color:#0ff; font-size:1.2rem; text-shadow:0 0 8px #0ff;">
-              🏆 Pronto anunciaremos a los campeones en esta página 🏆
-            </span>
-          </div>
-          <p class="fw-bold animate-pulse" style="color:#f0f; text-shadow:0 0 10px #f0f;">
-            ¡Sigue atento y prepárate para el próximo reto!
-          </p>
+        <div class="modal-body text-white">
+          <div style="margin: 10px 0; padding: 10px; background: #00d4ff; border-radius: 5px; color: #51f804;">𝟙º 𝕃𝕦𝕘𝕒𝕣:
+            𝕸𝖎𝖈𝖆𝖊𝖑𝖆 𝕽𝖔𝖏𝖆𝖘 - 43,210 puntos</div>
+          <div style="margin: 10px 0; padding: 10px; background: #00d4ff; border-radius: 5px; color: #51f804;">𝟚º 𝕃𝕦𝕘𝕒𝕣:
+            𝕬𝖑𝖈𝖎𝖉𝖊𝖘 𝕾𝖆𝖓𝖈𝖍𝖊𝖟 - 42,110 puntos</div>
+          <div style="margin: 10px 0; padding: 10px; background: #00d4ff; border-radius: 5px; color: #51f804;">𝟛º 𝕃𝕦𝕘𝕒𝕣:
+            𝕻𝖆𝖔𝖑𝖆 𝕽𝖆𝖒𝖔𝖘 - 34,740 puntos</div>
         </div>
         <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-neon" data-bs-dismiss="modal" onclick="tap()">Continuar</button>
+          <button type="button" class="btn btn-neon" data-bs-dismiss="modal" onclick="tap()">Cerrar</button>
         </div>
       </div>
     </div>
@@ -97,6 +85,101 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/game.js"></script>
+  <script>
+    // Confetti simple
+    function launchConfetti() {
+      const canvas = document.createElement('canvas');
+      canvas.id = 'confettiCanvas';
+      canvas.style.position = 'fixed';
+      canvas.style.top = 0;
+      canvas.style.left = 0;
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.zIndex = 9999;
+      document.body.appendChild(canvas);
+
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const confettiCount = 120;
+      const confetti = [];
+      for (let i = 0; i < confettiCount; i++) {
+        confetti.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          r: Math.random() * 8 + 4,
+          d: Math.random() * confettiCount,
+          color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+          tilt: Math.random() * 10 - 10
+        });
+      }
+
+      function drawConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confetti.forEach(c => {
+          ctx.beginPath();
+          ctx.ellipse(c.x, c.y, c.r, c.r / 2, c.tilt, 0, 2 * Math.PI);
+          ctx.fillStyle = c.color;
+          ctx.fill();
+        });
+      }
+
+      function updateConfetti() {
+        confetti.forEach(c => {
+          c.y += 4 + Math.random() * 2;
+          c.x += Math.sin(c.d) * 2;
+          c.tilt += 0.1;
+          if (c.y > canvas.height) c.y = -10;
+        });
+      }
+
+      let duration = 3000;
+      let start = null;
+      function animateConfetti(ts) {
+        if (!start) start = ts;
+        let elapsed = ts - start;
+        drawConfetti();
+        updateConfetti();
+        if (elapsed < duration) {
+          requestAnimationFrame(animateConfetti);
+        } else {
+          canvas.remove();
+        }
+      }
+      requestAnimationFrame(animateConfetti);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      launchConfetti();
+      // Show contest modal on page load
+      const contestModal = new bootstrap.Modal(document.getElementById('podiumModal'), {
+        backdrop: 'static',
+        keyboard: false
+      });
+      contestModal.show();
+
+      // Show instructions modal when contest modal is closed
+      document.getElementById('podiumModal').addEventListener('hidden.bs.modal', () => {
+        const howToPlayModal = new bootstrap.Modal(document.getElementById('howToPlayModal'), {
+          backdrop: 'static',
+          keyboard: false
+        });
+        howToPlayModal.show();
+      });
+
+      restartBtn.addEventListener('click', function () {
+        soundClick.currentTime = 0;
+        soundClick.play();
+        if (bgMusic.paused) {
+          bgMusic.currentTime = 0;
+          bgMusic.play();
+        }
+        restart();
+      });
+    });
+  </script>
 </body>
 
 </html>
